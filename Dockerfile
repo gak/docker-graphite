@@ -18,9 +18,5 @@ RUN	chown -R www-data /var/lib/graphite/storage
 RUN	chmod 0775 /var/lib/graphite/storage /var/lib/graphite/storage/whisper
 RUN	chmod 0664 /var/lib/graphite/storage/graphite.db
 RUN	cd /var/lib/graphite/webapp/graphite && python manage.py syncdb --noinput
-VOLUME  /var/lib/graphite
-EXPOSE	:80
-EXPOSE	:2003
-EXPOSE	:2004
-EXPOSE	:7002
+RUN pip install pystatsd
 CMD	["/usr/bin/supervisord", "-n"]
